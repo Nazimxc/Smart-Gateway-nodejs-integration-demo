@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Refund Console</title>
+
+<style>
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#111827,#2563eb);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0;
+}
+
+.container{
+    background:white;
+    width:420px;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+.title{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    font-size:13px;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:5px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#2563eb;
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    background:#dc2626;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.btn:hover{
+    background:#b91c1c;
+}
+
+.footer{
+    text-align:center;
+    font-size:12px;
+    color:#777;
+    margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="title">Refund Request</div>
+<div class="subtitle">Payment Gateway Refund API Testing</div>
+
+<form method="post" action="initiateRefund">
+
+<div class="form-group">
+<label>Order ID</label>
+<input type="text" name="order_id" id="order_id" required>
+</div>
+
+<div class="form-group">
+<label>Unique Request ID</label>
+<input type="text" name="unique_request_id" id="unique_request_id" readonly>
+</div>
+
+<div class="form-group">
+<label>Refund Amount</label>
+<input type="text" name="amount" value="1.00">
+</div>
+
+<button class="btn" type="submit">
+Initiate Refund
+</button>
+
+</form>
+
+<div class="footer">
+Demo Refund Console • API Integration Testing
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("unique_request_id").value = "ref_" + Date.now();
+
+function getQueryParam(name){
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+const refundValue = getQueryParam('order_id');
+const orderIdInput = document.getElementById('order_id');
+
+if(orderIdInput && refundValue !== null){
+    orderIdInput.value = refundValue;
+}
+
+</script>
+
+</body>
+</html>
